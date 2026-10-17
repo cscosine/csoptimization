@@ -56,6 +56,7 @@ def install_csoptimization_build_dependencies(
     dev: bool,
     download_dependencies_manifest_and_bundle: bool,
     mapping_function: MappingFunction,
+    phase_name_suffix: str,
     required_libs: list[str] | None = None,
 ) -> Report:
 
@@ -71,7 +72,7 @@ def install_csoptimization_build_dependencies(
         git_repo="csfoundation",
         project_name="csfoundation",
         project_version="0.1.0",
-        release_tag="v0.1.0-rc1",
+        release_tag="v0.1.0-rc2",
     )
 
     third_party_base_libs_provider = ManifestGithub(
@@ -138,6 +139,7 @@ def install_csoptimization_build_dependencies(
             external_library_dependencies_dev=external_dependencies_dev,
             external_provides_description=external_providers,
             provider_mapping_function={},
+            phase_name_suffix=phase_name_suffix,
         )
     )
 
@@ -151,6 +153,8 @@ def auto_install_csorchestrator_managed_libraries(
     manifest_loaded: ReleaseManifest,
     dependencies_config_path: Path,
     mapping_function: MappingFunction,
+    download_dependencies_manifest_and_bundle: bool,
+    phase_name_suffix: str,
     required_libs: list[str] | None = None,
 ) -> Report:
 
@@ -160,9 +164,10 @@ def auto_install_csorchestrator_managed_libraries(
         base_libs_dir=base_libs_dir,
         dependencies_config_path=dependencies_config_path,
         dev=False,
-        download_dependencies_manifest_and_bundle=True,
+        download_dependencies_manifest_and_bundle=download_dependencies_manifest_and_bundle,
         required_libs=required_libs,
         mapping_function=mapping_function,
+        phase_name_suffix=phase_name_suffix,
     )
 
     report.append_report(
@@ -173,6 +178,8 @@ def auto_install_csorchestrator_managed_libraries(
             base_libs_dir=base_libs_dir,
             lib_name_list=required_libs,
             mapping_function=mapping_function,
+            phase_name=phase_name_suffix,
+            dev=False,
         )
     )
 

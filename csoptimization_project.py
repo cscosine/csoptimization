@@ -75,12 +75,7 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
     # The auto-install helper installs the Linux system requirements for the
     # libraries being built and downloads, transitively and cross-repo, only
     # the managed libraries they need from the third_party_base_libs and
-    # csqt6 releases (e.g. qt6 only when csVisOpenGL is built).
     built_first_party_libs = extract_repo_list_build_non_none(extract_build_config_dict(repos))
-
-    report.append_warning(
-        "WAR: install_csoptimization_build_dependencies download_dependencies_manifest_and_bundle=False"
-    )
 
     report.append_report(
         install_csoptimization_build_dependencies(
@@ -91,6 +86,7 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
             dependencies_config_path=Path("dependencies"),
             mapping_function=identity_mapping_function,
             download_dependencies_manifest_and_bundle=False,
+            phase_name_suffix="csoptimization dependencies",
         )
     )
 
