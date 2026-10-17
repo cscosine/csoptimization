@@ -78,7 +78,7 @@ def install_csfoundation_build_dependencies(
         git_repo="third_party_base_libs",
         project_name="third_party_base_libs",
         project_version="0.1.0",
-        release_tag="v0.1.0-rc2",
+        release_tag="v0.1.0-rc3",
     )
 
     csqt6_provider = ManifestGithub(
@@ -87,12 +87,11 @@ def install_csfoundation_build_dependencies(
         git_repo="csqt6",
         project_name="csqt6",
         project_version="6.11.1",
-        release_tag="v6.11.1-rc2",
+        release_tag="v6.11.1-rc3",
     )
 
     external_providers = [
         third_party_base_libs_provider,
-        csqt6_provider,
     ]
 
     external_dependencies = {
@@ -102,10 +101,6 @@ def install_csfoundation_build_dependencies(
             "csLie": ["eigen3"],
             "csCamera": ["eigen3"],
             "csVisOpenGL": ["eigen3"],
-        },
-        # provider qt6
-        csqt6_provider.project_name: {
-            "csVisOpenGL": ["qt6"],
         },
     }
 
@@ -119,7 +114,16 @@ def install_csfoundation_build_dependencies(
         },
     }
 
-    provider_mapping_functions_names = {csqt6_provider.project_name: "qt6_mapping"}
+    provider_mapping_functions_names = {}
+
+    if required_libs is None or "csVisOpenGL" in required_libs:
+        external_providers.append(csqt6_provider)
+
+        external_dependencies[csqt6_provider.project_name] = {
+            "csVisOpenGL": ["qt6"],
+        }
+
+        provider_mapping_functions_names = {csqt6_provider.project_name: "qt6_mapping"}
 
     # and the dependent external libraries
 
