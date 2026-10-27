@@ -312,6 +312,18 @@ jobs:
         fi
       if: ${{ matrix.os == 'linux' && startsWith(matrix.os_version, 'ubuntu') }}
       shell: bash
+    - name: Get Precompiled Lib Catch2 download tar.gz
+      uses: robinraju/release-downloader@v1.13
+      with:
+        repository: cscosine/third_party_base_libs
+        tag: v0.1.0-rc3
+        fileName: third_party_base_libs-0.1.0-Catch2-3.10.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz
+        out-file-path: workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}
+    - name: Get Precompiled Lib Catch2 extract tar.gz
+      run: |-
+        tar -xzf workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}/third_party_base_libs-0.1.0-Catch2-3.10.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz -C workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}
+        rm -f workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}/third_party_base_libs-0.1.0-Catch2-3.10.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz
+      shell: bash
     - name: Get Precompiled Lib NamedType download tar.gz
       uses: robinraju/release-downloader@v1.13
       with:
@@ -424,7 +436,7 @@ jobs:
       uses: robinraju/release-downloader@v1.13
       with:
         repository: cscosine/csfoundation
-        tag: v0.1.0-rc5
+        tag: v0.1.0-rc7
         fileName: csfoundation-0.1.0-csCamera-1.0.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz
         out-file-path: workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}
     - name: Get Precompiled Lib csCamera extract tar.gz
@@ -436,7 +448,7 @@ jobs:
       uses: robinraju/release-downloader@v1.13
       with:
         repository: cscosine/csfoundation
-        tag: v0.1.0-rc5
+        tag: v0.1.0-rc7
         fileName: csfoundation-0.1.0-csCore-1.0.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz
         out-file-path: workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}
     - name: Get Precompiled Lib csCore extract tar.gz
@@ -448,7 +460,7 @@ jobs:
       uses: robinraju/release-downloader@v1.13
       with:
         repository: cscosine/csfoundation
-        tag: v0.1.0-rc5
+        tag: v0.1.0-rc7
         fileName: csfoundation-0.1.0-csLie-1.0.0-csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}.tar.gz
         out-file-path: workspace/libs/csv1-${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.architecture }}-${{ matrix.architecture_variant }}-${{ matrix.compiler }}-${{ matrix.compiler_version }}-${{ matrix.generator }}
     - name: Get Precompiled Lib csLie extract tar.gz

@@ -28,6 +28,7 @@ LIBRARY_DEPENDENCIES_DEV: dict[str, list[str]] = {}
 def install_requirements(
     orchestrator: Orchestrator,
     dev: bool,
+    phase_name_suffix: str,
     lib_list: list[str] | None = None,  # none means all
 ) -> None:
     """Install the Linux system requirements needed by the requested libraries.
@@ -42,10 +43,11 @@ def install_requirements(
     _ = dev  # ignore dev, those packages are required both in development and as dependencies
 
     install_ubuntu_apt_packages(
-        orchestrator,
-        [
+        orchestrator=orchestrator,
+        packages=[
             "libomp-dev",
         ],
+        phase_name_suffix=phase_name_suffix,
     )
 
 
@@ -63,7 +65,9 @@ def install_csoptimization_build_dependencies(
     report = Report()
 
     # the packages we need to install
-    install_requirements(orchestrator=orchestrator, lib_list=required_libs, dev=dev)
+    install_requirements(
+        orchestrator=orchestrator, lib_list=required_libs, dev=dev, phase_name_suffix=phase_name_suffix
+    )
 
     # external providers
     csfoundation_provider = ManifestGithub(
@@ -72,7 +76,7 @@ def install_csoptimization_build_dependencies(
         git_repo="csfoundation",
         project_name="csfoundation",
         project_version="0.1.0",
-        release_tag="v0.1.0-rc5",
+        release_tag="v0.1.0-rc7",
     )
 
     third_party_base_libs_provider = ManifestGithub(
