@@ -20,7 +20,11 @@ from csorchestrator.application.recipes.repos_config import (
     extract_repo_ref_dict,
 )
 from csorchestrator.foundation.core.report import Report
-from csorchestrator.frontend.cscmake_presets.supported_variants import BuildConfig
+from csorchestrator.frontend.cscmake_presets.supported_variants import (
+    BuildConfig,
+    get_context_list_linux,
+    get_context_list_macos,
+)
 from csorchestrator.frontend.step.step_get_precompiled_lib_github import identity_mapping_function
 
 from csoptimization_config import (
@@ -37,7 +41,7 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
     base_install_dir = base_target_dir / Path("install")
     base_libs_dir = base_target_dir / Path("libs")
     common_repo_ref = "dev"
-    cscmake_version = "1.0.0-rc1"
+    cscmake_version = "1.0.0-rc7"
 
     repos: RepoRefBuildPublishConfigDict = {
         "csBlockMatrix": RepoRefBuildPublishConfig(common_repo_ref, BuildConfig.DEBUG_RELEASE_RELWITHDEBINFO_PARANOID),
@@ -60,6 +64,12 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
         additional_files_list=[Path("csoptimization_config.py")],
         repo_dependencies_dict=library_dependencies,
         repo_dependencies_dev_dict=library_dependencies_dev,
+        # opt-in variants: Ubuntu 26.04 (as 22.04/24.04), macOS 15/26 (Ninja Multi-Config, Xcode)
+        additional_matrix_list=(
+            get_context_list_linux("ubuntu26.04")
+            + get_context_list_macos("macos15")
+            + get_context_list_macos("macos26")
+        ),
     )
 
     # ----------------------------------------------------------------
