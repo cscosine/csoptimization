@@ -40,8 +40,8 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
     base_target_dir = Path("workspace")
     base_install_dir = base_target_dir / Path("install")
     base_libs_dir = base_target_dir / Path("libs")
-    common_repo_ref = "dev"
-    cscmake_version = "1.0.0-rc7"
+    common_repo_ref = "main"
+    cscmake_version = "1.0.0-rc8"
 
     repos: RepoRefBuildPublishConfigDict = {
         "csBlockMatrix": RepoRefBuildPublishConfig(common_repo_ref, BuildConfig.DEBUG_RELEASE_RELWITHDEBINFO_PARANOID),
