@@ -19,6 +19,7 @@ from csorchestrator.application.recipes.repos_config import (
     extract_repo_list_build_non_none,
     extract_repo_ref_dict,
 )
+from csorchestrator.domain.orchestrator.workflow_config import Cron, DayOfWeek
 from csorchestrator.foundation.core.report import Report
 from csorchestrator.frontend.cscmake_presets.supported_variants import (
     BuildConfig,
@@ -59,6 +60,8 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
 
     o = create_default_orchestrator(
         name="csoptimization",
+        # staggered weekly run (UTC), one project at a time in the build-train order (no shared runners)
+        schedule=Cron.weekly(DayOfWeek.MON, hour=4, minute=45),
         version="0.1.0",
         base_install_dir=base_install_dir,
         additional_files_list=[Path("csoptimization_config.py")],
