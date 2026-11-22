@@ -1,0 +1,7 @@
+{
+  "name": "csoptimization",
+  "description": "The cscosine optimisation libraries of csoptimization (csNelson: nonlinear least squares, csBlockMatrix: block-structured matrices): what they are for, their CMake packages, how a project gets them.",
+  "version": "0.1.1",
+  "author": { "name": "cscosine" },
+  "repository": "https://github.com/cscosine/csoptimization"
+}

@@ -30,3 +30,9 @@ there, then `copier update --defaults`; never edit its parts here):
 ## csoptimization
 
 Non-linear optimisation libraries
+
+- **The skill for the projects using the libraries**: [agent-plugin/skills/csoptimization-libs/SKILL.md](agent-plugin/skills/csoptimization-libs/SKILL.md),
+  the Claude Code plugin `csoptimization` of the `cscosine` marketplace (`cscosine/.github`). A change of a library's
+  public API, packages or components, or of the release, updates it in the same PR (or, for a change in a library
+  repository, in the csoptimization PR that moves to it); its `version` in `agent-plugin/.claude-plugin/plugin.json`
+  follows the csoptimization version. Test it with `claude --plugin-dir agent-plugin`.
