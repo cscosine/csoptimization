@@ -62,7 +62,7 @@ def create_orchestrator() -> OptionalOrchestratorWithReport:
         name="csoptimization",
         # staggered weekly run (UTC), one project at a time in the build-train order (no shared runners)
         schedule=Cron.weekly(DayOfWeek.MON, hour=4, minute=10),
-        version="0.1.0",
+        version="0.1.1",
         base_install_dir=base_install_dir,
         additional_files_list=[Path("csoptimization_config.py")],
         repo_dependencies_dict=library_dependencies,
